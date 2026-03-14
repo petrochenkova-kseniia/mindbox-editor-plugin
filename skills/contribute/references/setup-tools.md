@@ -48,21 +48,3 @@ git config --global user.email "email@example.com"
 ```
 
 Спросить у пользователя его имя и email для настройки.
-
-## 5. Автообновление плагинов
-
-Проверить, включено ли автообновление:
-
-```bash
-echo $FORCE_AUTOUPDATE_PLUGINS
-```
-
-Если пусто — включить:
-
-```bash
-if [ -f ~/.zshrc ]; then
-  echo 'export FORCE_AUTOUPDATE_PLUGINS=true' >> ~/.zshrc && source ~/.zshrc
-else
-  echo 'export FORCE_AUTOUPDATE_PLUGINS=true' >> ~/.bashrc && source ~/.bashrc
-fi
-```
