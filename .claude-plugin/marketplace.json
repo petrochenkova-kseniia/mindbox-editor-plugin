@@ -1,0 +1,12 @@
+{
+  "name": "mindbox-editor-plugin",
+  "owner": {
+    "name": "Mindbox Team"
+  },
+  "plugins": [
+    {
+      "name": "mindbox-editor-plugin",
+      "source": "."
+    }
+  ]
+}
