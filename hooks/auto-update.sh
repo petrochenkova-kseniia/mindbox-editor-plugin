@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
 # Автообновление marketplace-репозитория плагина mindbox-editor-plugin.
-# Запускается при каждом старте сессии Claude Code.
+# Запускается при старте сессии (session_start) и при отправке сообщения (prompt_submit).
 # Для пользователя полностью бесшумный — логи пишутся в файл.
 
 # Подавить весь вывод в stdout/stderr хука
 exec >/dev/null 2>&1
+
+MODE="${1:-session_start}"
 
 PLUGIN_NAME="mindbox-editor-plugin"
 LOG_DIR="$HOME/.claude/plugins/logs"
 LOG_FILE="$LOG_DIR/$PLUGIN_NAME-update.log"
 MARKETPLACE_DIR="$HOME/.claude/plugins/marketplaces/$PLUGIN_NAME"
 MAX_LOG_LINES=50
+LAST_CHECK_FILE="$HOME/.claude/plugins/.mindbox-last-update-check"
+DEBOUNCE_INTERVAL=3600
 
 log() {
   local level="$1"
@@ -31,6 +35,26 @@ log() {
     fi
   fi
 }
+
+# --- Debounce gate (только для prompt_submit) ---
+if [ "$MODE" = "prompt_submit" ]; then
+  now=$(date +%s)
+  if [ -f "$LAST_CHECK_FILE" ]; then
+    last_check=$(cat "$LAST_CHECK_FILE" 2>/dev/null)
+    if [[ "$last_check" =~ ^[0-9]+$ ]]; then
+      elapsed=$((now - last_check))
+      if [ "$elapsed" -lt "$DEBOUNCE_INTERVAL" ]; then
+        exit 0
+      fi
+    fi
+  fi
+fi
+
+# --- Обновить timestamp до сетевых вызовов ---
+mkdir -p "$(dirname "$LAST_CHECK_FILE")"
+date +%s > "$LAST_CHECK_FILE"
+
+log "START" "Update check started (mode=$MODE)"
 
 # Проверить что marketplace-директория существует и является git-репозиторием
 if [ ! -d "$MARKETPLACE_DIR/.git" ]; then
@@ -71,7 +95,7 @@ if git pull --ff-only origin "$DEFAULT_BRANCH" 2>/dev/null; then
   NEW_SHA=$(git rev-parse --short=7 HEAD 2>/dev/null)
   log "UPDATED" "Updated marketplace from $LOCAL_SHA to $NEW_SHA"
 else
-  log "ERROR" "git pull --ff-only failed (not a fast-forward?). Will retry next session."
+  log "ERROR" "git pull --ff-only failed (not a fast-forward?). Will retry next check."
   exit 0
 fi
 

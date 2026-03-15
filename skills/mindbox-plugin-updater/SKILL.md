@@ -15,17 +15,25 @@ version: 0.1.0
 
 ## Как работает автообновление
 
-При каждом запуске сессии Claude Code срабатывает SessionStart хук (`hooks/auto-update.sh`, таймаут 15 секунд). Он делает следующее:
+Обновление запускается двумя хуками (`hooks/auto-update.sh`, таймаут 15 секунд):
 
-1. Переходит в marketplace-директорию: `~/.claude/plugins/marketplaces/mindbox-editor-plugin`
-2. Выполняет `git fetch origin main` — скачивает информацию о новых коммитах
-3. Сравнивает локальный SHA с удалённым
-4. Если есть обновления — выполняет `git pull --ff-only origin main`
-5. Записывает результат в лог: `~/.claude/plugins/logs/mindbox-editor-plugin-update.log`
+1. **SessionStart** — при каждом запуске новой сессии (без debounce, всегда проверяет)
+2. **UserPromptSubmit** — при отправке сообщения пользователем (с debounce: не чаще раза в час)
+
+Скрипт делает следующее:
+
+1. Проверяет debounce (только для prompt_submit): если с последней проверки прошло менее 1 часа — мгновенный выход
+2. Записывает timestamp проверки в файл `~/.claude/plugins/.mindbox-last-update-check`
+3. Переходит в marketplace-директорию: `~/.claude/plugins/marketplaces/mindbox-editor-plugin`
+4. Выполняет `git fetch origin main` — скачивает информацию о новых коммитах
+5. Сравнивает локальный SHA с удалённым
+6. Если есть обновления — выполняет `git pull --ff-only origin main`
+7. Переустанавливает плагин: `claude plugin install` — обновляет кэш
+8. Записывает результат в лог: `~/.claude/plugins/logs/mindbox-editor-plugin-update.log`
 
 Весь вывод скрипта подавлен — пользователь ничего не видит.
 
-**Однократная задержка:** хук обновляет marketplace-директорию, но кэш плагина обновляется самим Claude Code при следующем запуске. Поэтому после обновления пользователю достаточно перезапустить Claude Code. Это нормальное поведение, не ошибка.
+**Задержка применения:** после обновления кэш обновлён, но Claude Code подхватит новую версию при следующем запуске или после команды `/reload-plugins`. Это нормальное поведение, не ошибка.
 
 ## Формат лога
 
@@ -35,8 +43,12 @@ version: 0.1.0
 
 | Уровень | Значение |
 |---------|----------|
+| `START` | Проверка обновлений начата (указан mode: session_start или prompt_submit) |
 | `OK` | Плагин уже актуальный, обновлений нет |
-| `UPDATED` | Обновление успешно применено (указаны старый и новый SHA) |
+| `UPDATED` | Обновление marketplace успешно применено (указаны старый и новый SHA) |
+| `INSTALL` | Начата переустановка плагина |
+| `INSTALL_OK` | Плагин переустановлен успешно |
+| `INSTALL_ERROR` | Ошибка переустановки (подробности в сообщении) |
 | `ERROR` | Произошла ошибка (подробности в сообщении) |
 | `SKIP` | Marketplace-директория не найдена, обновление пропущено |
 
@@ -125,5 +137,6 @@ claude plugin install mindbox-editor-plugin@mindbox-editor-plugin
 |-----|------|
 | Marketplace-репозиторий | `~/.claude/plugins/marketplaces/mindbox-editor-plugin` |
 | Лог автообновления | `~/.claude/plugins/logs/mindbox-editor-plugin-update.log` |
+| Timestamp debounce | `~/.claude/plugins/.mindbox-last-update-check` |
 | Кэш плагина | `~/.claude/plugins/cache/mindbox-editor-plugin/` |
 | Реестр плагинов | `~/.claude/plugins/installed_plugins.json` |

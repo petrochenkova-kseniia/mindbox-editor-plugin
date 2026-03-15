@@ -1,12 +1,23 @@
 {
-  "description": "Автообновление плагина при старте сессии",
+  "description": "Автообновление плагина при старте сессии и периодически при работе",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/auto-update.sh",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/auto-update.sh session_start",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/auto-update.sh prompt_submit",
             "timeout": 15
           }
         ]
