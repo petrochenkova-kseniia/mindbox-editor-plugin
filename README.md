@@ -26,7 +26,7 @@
    │                     │   │                              │
    │  Одна команда в     │   │  Используйте скилл          │
    │  Claude Code —      │   │  /mindbox-editor-plugin:     │
-   │  и всё работает.    │   │        contribute            │
+   │  и всё работает.    │   │  mindbox-plugin-contributor  │
    │                     │   │                              │
    │  Ничего             │   │  Claude проведёт через       │
    │  дополнительно      │   │  весь процесс:              │
