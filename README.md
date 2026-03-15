@@ -45,21 +45,32 @@
 
 ## Установка
 
-Выполни эти команды в терминале:
+### 1. Проверить git
+
+Для работы плагина нужен git. Проверь, установлен ли он:
+
+```bash
+git --version
+```
+
+Если команда не найдена — нужен Homebrew. Если Homebrew уже установлен, попроси Claude выполнить `brew install git`. Если нет — сначала поставь Homebrew вручную: открой Терминал (Cmd + Пробел → «Terminal» → Enter) и вставь команду:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Следуй инструкциям на экране (потребуется ввести пароль от Mac). После этого вернись в Claude Code — он сам доустановит git и продолжит установку плагина.
+
+### 2. Установить плагин
 
 ```bash
 claude plugin marketplace add petrochenkova-kseniia/mindbox-editor-plugin
 claude plugin install mindbox-editor-plugin@mindbox-editor-plugin
 ```
 
-## Настройка автообновления
+## Автообновление
 
-Автообновление нужно включить вручную. Попроси пользователя сделать следующее:
+Плагин обновляется автоматически при каждом запуске Claude Code. Ничего дополнительно настраивать не нужно.
 
-1. Открыть Терминал (на macOS: Cmd + Пробел → «Terminal» → Enter)
-2. Ввести команду `claude` и нажать Enter
-3. Ввести `/plugin` и нажать Enter
-4. Перейти во вкладку **Marketplaces**
-5. Выбрать `mindbox-editor-plugin`
-6. Нажать **Enable auto-update**
-7. Закрыть и открыть Claude Code заново
+Если возникли проблемы с обновлением, лог можно найти в файле:
+`~/.claude/plugins/logs/mindbox-editor-plugin-update.log`
