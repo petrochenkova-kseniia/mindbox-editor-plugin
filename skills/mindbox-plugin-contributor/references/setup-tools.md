@@ -23,19 +23,10 @@ brew install gh
 ## 3. Авторизация в GitHub
 
 ```bash
-gh auth login
+gh auth login --web --git-protocol https
 ```
 
-Выбрать:
-1. GitHub.com
-2. **HTTPS** (важно — выбрать именно HTTPS, не SSH)
-3. Login with a web browser
-4. Скопировать код, открыть ссылку в браузере, вставить код
-
-Если протокол уже настроен как SSH — переключить на HTTPS:
-```bash
-gh config set git_protocol https
-```
+Команда откроет браузер для авторизации и автоматически настроит протокол HTTPS.
 
 Проверить: `gh auth status`
 
