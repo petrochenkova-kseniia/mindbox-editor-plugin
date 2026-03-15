@@ -69,9 +69,20 @@ fi
 # Применить обновления
 if git pull --ff-only origin "$DEFAULT_BRANCH" 2>/dev/null; then
   NEW_SHA=$(git rev-parse --short=7 HEAD 2>/dev/null)
-  log "UPDATED" "Updated from $LOCAL_SHA to $NEW_SHA"
+  log "UPDATED" "Updated marketplace from $LOCAL_SHA to $NEW_SHA"
 else
   log "ERROR" "git pull --ff-only failed (not a fast-forward?). Will retry next session."
+  exit 0
+fi
+
+# Переустановить плагин чтобы Claude Code подхватил новую версию
+log "INSTALL" "Installing updated plugin..."
+INSTALL_OUTPUT=$(claude plugin install "$PLUGIN_NAME@$PLUGIN_NAME" 2>&1)
+INSTALL_EXIT=$?
+if [ $INSTALL_EXIT -eq 0 ]; then
+  log "INSTALL_OK" "Plugin reinstalled successfully"
+else
+  log "INSTALL_ERROR" "Plugin reinstall failed (exit=$INSTALL_EXIT): $INSTALL_OUTPUT"
 fi
 
 exit 0
