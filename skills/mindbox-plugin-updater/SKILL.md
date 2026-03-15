@@ -1,5 +1,5 @@
 ---
-name: plugin-updater
+name: mindbox-plugin-updater
 description: >
   Скилл для диагностики и починки обновления плагина mindbox-editor-plugin.
   Использовать когда пользователь говорит «плагин не обновляется», «обновить плагин»,
