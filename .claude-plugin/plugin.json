@@ -1,6 +1,6 @@
 {
   "name": "mindbox-editor-plugin",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Общие редакционные стили, политики и скиллы для команды редакторов Mindbox.",
   "author": {
     "name": "Mindbox Team"
