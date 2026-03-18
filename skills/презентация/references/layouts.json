@@ -1,0 +1,291 @@
+{
+  "_comment": "Маппинг типов контента на номера слайдов в шаблоне Mindbox (1-indexed). Слайды 88-99 исключены.",
+
+  "covers": {
+    "title_subtitle_logo": {
+      "slides": [4, 5],
+      "description": "Обложка: заголовок + подзаголовок + логотип",
+      "text_fields": ["title", "subtitle"],
+      "when": "Первый слайд презентации. Содержит название эфира/вебинара и подзаголовок."
+    }
+  },
+
+  "section_dividers": {
+    "text_only": {
+      "slides": [7, 8],
+      "description": "Перебивка: крупный текст на цветном фоне",
+      "text_fields": ["title"],
+      "when": "Между крупными блоками презентации. Одна фраза, без подзаголовков."
+    }
+  },
+
+  "lists": {
+    "numbered_3": {
+      "slides": [10],
+      "description": "Содержание: 3 пронумерованных пункта",
+      "text_fields": ["title", "item_1", "item_2", "item_3"],
+      "when": "Повестка, план эфира, 3 ключевых тезиса."
+    },
+    "numbered_5": {
+      "slides": [11],
+      "description": "Содержание: 5 пронумерованных пунктов",
+      "text_fields": ["title", "item_1", "item_2", "item_3", "item_4", "item_5"],
+      "when": "Расширенная повестка или план."
+    },
+    "two_columns": {
+      "slides": [12],
+      "description": "Две колонки текста",
+      "text_fields": ["title", "col_1_title", "col_1_text", "col_2_title", "col_2_text"],
+      "when": "Сравнение двух подходов, до/после."
+    }
+  },
+
+  "people": {
+    "single_speaker": {
+      "slides": [14],
+      "description": "Карточка одного спикера: фото + имя + должность",
+      "text_fields": ["name", "role", "company"],
+      "when": "Представление одного спикера."
+    },
+    "centered_speaker": {
+      "slides": [15],
+      "description": "Спикер по центру",
+      "text_fields": ["name", "role", "company"],
+      "when": "Выделенное представление спикера (например, модератор)."
+    },
+    "three_speakers": {
+      "slides": [16],
+      "description": "Три спикера в ряд",
+      "text_fields": ["name_1", "role_1", "company_1", "name_2", "role_2", "company_2", "name_3", "role_3", "company_3"],
+      "when": "Панель из трёх спикеров, как в примере АндерСон."
+    }
+  },
+
+  "about_mindbox": {
+    "product": {
+      "slides": [18, 19, 20],
+      "description": "Формат слайдов «Что такое Mindbox» — можно использовать как шаблон структуры",
+      "text_fields": ["title", "description"],
+      "when": "Редко нужен как блок о Mindbox. Чаще — как шаблон формата для упаковки другого контента."
+    }
+  },
+
+  "clients": {
+    "brand_logos": {
+      "slides": [22, 23],
+      "description": "Логотипы клиентов/брендов",
+      "text_fields": ["title"],
+      "when": "Показать портфолио клиентов или партнёров."
+    }
+  },
+
+  "images": {
+    "one_image_light": {
+      "slides": [27],
+      "description": "Один скриншот на светлом фоне",
+      "text_fields": ["title", "caption"],
+      "when": "Скриншот интерфейса, дашборда, отчёта."
+    },
+    "one_image_dark": {
+      "slides": [28],
+      "description": "Один скриншот на тёмном фоне",
+      "text_fields": ["title", "caption"],
+      "when": "Скриншот на тёмном фоне (ночная тема, тёмный интерфейс)."
+    },
+    "two_images_light": {
+      "slides": [29],
+      "description": "Два скриншота на светлом фоне",
+      "text_fields": ["title", "caption_1", "caption_2"],
+      "when": "Сравнение двух экранов, до/после."
+    },
+    "two_images_dark": {
+      "slides": [30],
+      "description": "Два скриншота на тёмном фоне",
+      "text_fields": ["title", "caption_1", "caption_2"],
+      "when": "Сравнение на тёмном фоне."
+    },
+    "three_images": {
+      "slides": [31, 32],
+      "description": "Три скриншота (светлый/тёмный)",
+      "text_fields": ["title"],
+      "when": "Три экрана — например, мобильная воронка."
+    },
+    "four_images": {
+      "slides": [33, 34],
+      "description": "Четыре скриншота (светлый/тёмный)",
+      "text_fields": ["title"],
+      "when": "Обзор нескольких экранов."
+    },
+    "five_images": {
+      "slides": [35, 36],
+      "description": "Пять скриншотов",
+      "text_fields": ["title"],
+      "when": "Подборка экранов, flow из пяти шагов."
+    },
+    "six_images": {
+      "slides": [37, 38],
+      "description": "Шесть скриншотов",
+      "text_fields": ["title"],
+      "when": "Максимальная сетка скриншотов."
+    },
+    "full_bleed": {
+      "slides": [39, 40, 41, 42],
+      "description": "Полноэкранная картинка (с заголовком или без, светлый/тёмный)",
+      "text_fields": ["title"],
+      "when": "Большой скриншот на весь слайд."
+    }
+  },
+
+  "steps": {
+    "two_steps": {
+      "slides": [44],
+      "description": "Два шага / этапа",
+      "text_fields": ["title", "step_1_title", "step_1_text", "step_2_title", "step_2_text"],
+      "when": "Процесс из двух этапов, до/после."
+    },
+    "three_steps": {
+      "slides": [45],
+      "description": "Три шага / этапа",
+      "text_fields": ["title", "step_1_title", "step_1_text", "step_2_title", "step_2_text", "step_3_title", "step_3_text"],
+      "when": "Процесс из трёх этапов, как в примере Mario Berlucci (решение PDP)."
+    },
+    "four_steps": {
+      "slides": [46],
+      "description": "Четыре шага",
+      "text_fields": ["title", "step_1_title", "step_1_text", "step_2_title", "step_2_text", "step_3_title", "step_3_text", "step_4_title", "step_4_text"],
+      "when": "Процесс из четырёх этапов."
+    },
+    "five_steps": {
+      "slides": [47],
+      "description": "Пять шагов",
+      "text_fields": ["title", "step_1_title", "step_1_text", "step_2_title", "step_2_text", "step_3_title", "step_3_text", "step_4_title", "step_4_text", "step_5_title", "step_5_text"],
+      "when": "Процесс из пяти этапов, как CRM-цикл в примере АндерСон."
+    },
+    "comparison_2col": {
+      "slides": [48, 49],
+      "description": "Сравнение: два столбца",
+      "text_fields": ["title", "col_1_title", "col_1_items", "col_2_title", "col_2_items"],
+      "when": "Было/стало, ручное vs автоматическое."
+    },
+    "comparison_3col": {
+      "slides": [50, 51],
+      "description": "Сравнение: три столбца",
+      "text_fields": ["title", "col_1_title", "col_1_items", "col_2_title", "col_2_items", "col_3_title", "col_3_items"],
+      "when": "Три подхода, как в Mario Berlucci (массовые акции / ручное / автоматизация)."
+    }
+  },
+
+  "numbers": {
+    "one_number": {
+      "slides": [53],
+      "description": "Одна крупная цифра",
+      "text_fields": ["title", "number", "label"],
+      "when": "Главный результат: +23% к выручке."
+    },
+    "two_numbers": {
+      "slides": [54, 55],
+      "description": "Две цифры",
+      "text_fields": ["title", "number_1", "label_1", "number_2", "label_2"],
+      "when": "Два ключевых результата."
+    },
+    "three_numbers": {
+      "slides": [56, 57],
+      "description": "Три цифры",
+      "text_fields": ["title", "number_1", "label_1", "number_2", "label_2", "number_3", "label_3"],
+      "when": "Три результата в ряд, как итоги A/B-теста."
+    },
+    "four_numbers": {
+      "slides": [58, 59],
+      "description": "Четыре цифры",
+      "text_fields": ["title", "number_1", "label_1", "number_2", "label_2", "number_3", "label_3", "number_4", "label_4"],
+      "when": "Четыре метрики, обзор компании (55 магазинов, +94% оборот, ...)."
+    },
+    "five_numbers": {
+      "slides": [60, 61],
+      "description": "Пять цифр",
+      "text_fields": ["title", "number_1", "label_1", "number_2", "label_2", "number_3", "label_3", "number_4", "label_4", "number_5", "label_5"],
+      "when": "Пять метрик."
+    }
+  },
+
+  "tables": {
+    "simple_table": {
+      "slides": [63, 64, 65],
+      "description": "Таблица (варианты оформления)",
+      "text_fields": ["title"],
+      "when": "A/B-тест с несколькими параметрами, сравнительные данные."
+    }
+  },
+
+  "big_text": {
+    "quote": {
+      "slides": [67, 68, 69],
+      "description": "Крупный текст / цитата",
+      "text_fields": ["text", "author"],
+      "when": "Ключевой тезис, цитата спикера, вывод."
+    }
+  },
+
+  "charts": {
+    "chart_placeholder": {
+      "slides": [71, 72],
+      "description": "Место для графика",
+      "text_fields": ["title"],
+      "when": "Динамика метрик, тренды. Графики вставляются вручную."
+    }
+  },
+
+  "reviews": {
+    "one_review": {
+      "slides": [74],
+      "description": "Один отзыв",
+      "text_fields": ["title", "review_text", "author", "role"],
+      "when": "Отзыв клиента."
+    },
+    "two_reviews": {
+      "slides": [75],
+      "description": "Два отзыва",
+      "text_fields": ["title", "review_1_text", "review_1_author", "review_2_text", "review_2_author"],
+      "when": "Два отзыва."
+    },
+    "three_reviews": {
+      "slides": [76],
+      "description": "Три отзыва",
+      "text_fields": ["title", "review_1_text", "review_1_author", "review_2_text", "review_2_author", "review_3_text", "review_3_author"],
+      "when": "Три отзыва."
+    }
+  },
+
+  "closing": {
+    "thank_you": {
+      "slides": [78],
+      "description": "Спасибо / финальный слайд",
+      "text_fields": ["title"],
+      "when": "Завершение без CTA."
+    },
+    "cta": {
+      "slides": [79, 80],
+      "description": "Призыв к действию",
+      "text_fields": ["title", "cta_text", "contact"],
+      "when": "Напишите нам / оставьте заявку."
+    },
+    "contacts": {
+      "slides": [81, 82],
+      "description": "Контакты",
+      "text_fields": ["title", "name", "role", "email", "telegram"],
+      "when": "Контактная карточка спикера."
+    },
+    "qr_code": {
+      "slides": [83, 84],
+      "description": "QR-код",
+      "text_fields": ["title", "description"],
+      "when": "QR-код на ссылку, бот, материалы."
+    },
+    "questions": {
+      "slides": [85, 86],
+      "description": "Вопросы",
+      "text_fields": ["title"],
+      "when": "Слайд для Q&A сессии."
+    }
+  }
+}
