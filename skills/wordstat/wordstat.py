@@ -190,12 +190,11 @@ def main() -> None:
         err = result.get("error") if isinstance(result, dict) else None
         if err and err.get("http_code") == 403:
             die(
-                "HTTP 403: запрос отклонён, нет прав на Wordstat.\n"
-                "Попроси Илью Крупцова (инфра Mindbox) добавить твою\n"
-                "федеративную учётку в роль `search-api.executor` на каталог\n"
-                f"mindbox/dev (Folder ID {FOLDER_ID}).\n"
-                "После выдачи роли — повтори запрос (новый IAM-токен\n"
-                "выпустится автоматически).",
+                "HTTP 403: нет доступа к Wordstat.\n"
+                "Напиши Ксюше Петроченковой (petrochenkova@mindbox.cloud) —\n"
+                "она заведёт заявку в хелпдеск на выдачу доступа.\n"
+                "Как только доступ выдадут, попробуй ещё раз —\n"
+                "авторизация подхватится сама.",
                 code=3,
             )
 
