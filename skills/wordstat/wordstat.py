@@ -26,9 +26,11 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-# Каталог mindbox/dev в Yandex Cloud Mindbox. На него выдаётся роль
-# search-api.executor федеративным учёткам авторов Журнала.
-FOLDER_ID = "b1g0hbo5f2a37kl3bi8b"
+# Каталог Yandex Cloud Mindbox, в котором группе WordstatJournal выдана
+# роль search-api.executor. Доступ к группе раздаётся через terraform
+# в репо development/iam: автор добавляет себя в yc_groups в своём
+# common/users/<username>.yaml, делает MR, ~secops-support применяют.
+FOLDER_ID = "b1gqpnvhe3ravuh0ie9f"
 
 # Федерация Mindbox для входа через корпоративный SSO.
 FEDERATION_ID = "ajeaq0at6ev5p9je07tl"
@@ -191,10 +193,12 @@ def main() -> None:
         if err and err.get("http_code") == 403:
             die(
                 "HTTP 403: нет доступа к Wordstat.\n"
-                "Напиши Ксюше Петроченковой (petrochenkova@mindbox.cloud) —\n"
-                "она заведёт заявку в хелпдеск на выдачу доступа.\n"
-                "Как только доступ выдадут, попробуй ещё раз —\n"
-                "авторизация подхватится сама.",
+                "Тебе нужно попасть в группу WordstatJournal через MR в репо\n"
+                "development/iam. Твой Claude знает, как это сделать —\n"
+                "процесс описан в SKILL.md в разделе «Сценарий HTTP 403».\n"
+                "Если коротко: Claude поможет создать MR, после этого ты\n"
+                "напишешь Ксюше Петроченковой с готовым текстом — она пойдёт\n"
+                "в ~secops-support, попросит смержить и применить terraform.",
                 code=3,
             )
 
